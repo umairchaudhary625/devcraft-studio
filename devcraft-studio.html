@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DevCraft Studio — Web Development Agency</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --black: #0a0a0a;
+    --white: #f8f7f4;
+    --gray: #6b6b6b;
+    --light: #efefec;
+    --accent: #1a1a1a;
+    --line: #e0dfd9;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--white);
+    color: var(--black);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 22px 6vw;
+    background: rgba(248,247,244,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800; font-size: 1.1rem;
+    letter-spacing: -0.02em;
+  }
+  .nav-logo span { color: var(--gray); font-weight: 400; }
+  .nav-links { display: flex; gap: 36px; list-style: none; }
+  .nav-links a {
+    font-size: 0.88rem; color: var(--gray);
+    text-decoration: none; letter-spacing: 0.01em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--black); }
+  .nav-cta {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem; font-weight: 500;
+    padding: 10px 22px;
+    background: var(--black); color: var(--white);
+    border: none; cursor: pointer;
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+  .nav-cta:hover { opacity: 0.8; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 0 6vw 8vh;
+    border-bottom: 1px solid var(--line);
+    position: relative;
+  }
+  .hero-tag {
+    font-size: 0.78rem; letter-spacing: 0.18em;
+    color: var(--gray); text-transform: uppercase;
+    margin-bottom: 28px;
+    opacity: 0; animation: fadeUp 0.8s 0.2s forwards;
+  }
+  .hero h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(3.2rem, 8vw, 7.5rem);
+    font-weight: 800; line-height: 0.95;
+    letter-spacing: -0.03em;
+    max-width: 900px;
+    opacity: 0; animation: fadeUp 0.8s 0.4s forwards;
+  }
+  .hero h1 em { font-style: normal; color: var(--gray); }
+  .hero-bottom {
+    display: flex; align-items: flex-end; justify-content: space-between;
+    margin-top: 60px;
+    opacity: 0; animation: fadeUp 0.8s 0.6s forwards;
+  }
+  .hero-desc {
+    font-size: 1rem; color: var(--gray);
+    line-height: 1.7; max-width: 360px;
+  }
+  .hero-stats { display: flex; gap: 48px; }
+  .stat-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 2rem; font-weight: 700;
+    letter-spacing: -0.03em; display: block;
+  }
+  .stat-label { font-size: 0.78rem; color: var(--gray); letter-spacing: 0.05em; }
+
+  /* scroll indicator */
+  .scroll-line {
+    position: absolute; right: 6vw; bottom: 8vh;
+    display: flex; flex-direction: column; align-items: center; gap: 10px;
+    opacity: 0; animation: fadeIn 1s 1.2s forwards;
+  }
+  .scroll-line span {
+    font-size: 0.7rem; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--gray);
+    writing-mode: vertical-rl;
+  }
+  .scroll-line::before {
+    content: '';
+    width: 1px; height: 60px;
+    background: var(--gray); display: block;
+    animation: scrollDown 1.5s 1.5s infinite;
+  }
+
+  /* ── MARQUEE ── */
+  .marquee-wrap {
+    overflow: hidden; border-bottom: 1px solid var(--line);
+    padding: 18px 0; background: var(--black);
+  }
+  .marquee {
+    display: flex; gap: 60px;
+    animation: marquee 18s linear infinite;
+    white-space: nowrap;
+  }
+  .marquee span {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.78rem; font-weight: 600;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--white); opacity: 0.5;
+  }
+  .marquee span.dot { opacity: 1; color: #fff; font-size: 0.5rem; }
+
+  /* ── SERVICES ── */
+  .section { padding: 10vh 6vw; }
+  .section-header {
+    display: flex; align-items: baseline;
+    justify-content: space-between;
+    border-top: 1px solid var(--line);
+    padding-top: 32px; margin-bottom: 64px;
+  }
+  .section-num {
+    font-size: 0.75rem; letter-spacing: 0.15em;
+    color: var(--gray); text-transform: uppercase;
+  }
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 800; letter-spacing: -0.03em;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px; background: var(--line);
+    border: 1px solid var(--line);
+  }
+  .service-card {
+    background: var(--white);
+    padding: 48px 44px;
+    transition: background 0.3s;
+    cursor: default;
+  }
+  .service-card:hover { background: var(--black); }
+  .service-card:hover .svc-title,
+  .service-card:hover .svc-desc,
+  .service-card:hover .svc-num { color: var(--white); }
+  .service-card:hover .svc-arrow { color: var(--white); opacity: 1; }
+  .svc-num {
+    font-size: 0.72rem; letter-spacing: 0.16em;
+    color: var(--gray); text-transform: uppercase;
+    margin-bottom: 24px; display: block;
+    transition: color 0.3s;
+  }
+  .svc-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.4rem; font-weight: 700;
+    letter-spacing: -0.02em; margin-bottom: 14px;
+    transition: color 0.3s;
+  }
+  .svc-desc {
+    font-size: 0.9rem; color: var(--gray);
+    line-height: 1.7; transition: color 0.3s;
+  }
+  .svc-arrow {
+    display: block; margin-top: 32px;
+    font-size: 1.4rem; opacity: 0.25;
+    transition: all 0.3s; color: var(--black);
+  }
+
+  /* ── PROCESS ── */
+  .process-section { background: var(--light); }
+  .process-list { display: flex; flex-direction: column; }
+  .process-item {
+    display: flex; align-items: flex-start; gap: 40px;
+    padding: 36px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .process-item:last-child { border-bottom: none; }
+  .p-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.72rem; font-weight: 700;
+    letter-spacing: 0.12em; color: var(--gray);
+    min-width: 36px; padding-top: 4px;
+  }
+  .p-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.25rem; font-weight: 700;
+    letter-spacing: -0.02em; min-width: 200px;
+  }
+  .p-desc { font-size: 0.9rem; color: var(--gray); line-height: 1.7; }
+
+  /* ── PRICING ── */
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .price-card {
+    border: 1px solid var(--line);
+    padding: 44px 36px;
+    position: relative;
+    transition: border-color 0.3s, transform 0.3s;
+  }
+  .price-card:hover { border-color: var(--black); transform: translateY(-4px); }
+  .price-card.featured {
+    background: var(--black); color: var(--white);
+    border-color: var(--black);
+  }
+  .price-label {
+    font-size: 0.72rem; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--gray);
+    margin-bottom: 20px; display: block;
+  }
+  .price-card.featured .price-label { color: rgba(255,255,255,0.5); }
+  .price-amount {
+    font-family: 'Syne', sans-serif;
+    font-size: 2.8rem; font-weight: 800;
+    letter-spacing: -0.04em; margin-bottom: 6px;
+  }
+  .price-sub { font-size: 0.82rem; color: var(--gray); margin-bottom: 32px; }
+  .price-card.featured .price-sub { color: rgba(255,255,255,0.5); }
+  .price-features { list-style: none; margin-bottom: 36px; }
+  .price-features li {
+    font-size: 0.88rem; padding: 10px 0;
+    border-bottom: 1px solid var(--line);
+    color: var(--gray);
+  }
+  .price-card.featured .price-features li {
+    border-color: rgba(255,255,255,0.12);
+    color: rgba(255,255,255,0.8);
+  }
+  .price-features li::before { content: '→ '; }
+  .price-btn {
+    width: 100%; padding: 14px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.88rem; font-weight: 500;
+    cursor: pointer; text-align: center;
+    text-decoration: none; display: block;
+    transition: all 0.2s; letter-spacing: 0.02em;
+  }
+  .price-btn-outline {
+    border: 1px solid var(--black); background: transparent;
+    color: var(--black);
+  }
+  .price-btn-outline:hover { background: var(--black); color: var(--white); }
+  .price-btn-solid {
+    background: var(--white); color: var(--black); border: none;
+  }
+  .price-btn-solid:hover { opacity: 0.85; }
+
+  /* ── CONTACT ── */
+  .contact-section {
+    background: var(--black); color: var(--white);
+  }
+  .contact-inner {
+    display: flex; gap: 10vw; align-items: flex-start;
+  }
+  .contact-left { flex: 1; }
+  .contact-left h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2.4rem, 5vw, 4rem);
+    font-weight: 800; letter-spacing: -0.03em;
+    line-height: 1; margin-bottom: 24px;
+  }
+  .contact-left p { color: rgba(255,255,255,0.5); font-size: 0.95rem; line-height: 1.7; }
+  .contact-info { margin-top: 40px; }
+  .contact-info a {
+    display: block; color: rgba(255,255,255,0.7);
+    font-size: 0.9rem; text-decoration: none; margin-bottom: 10px;
+    transition: color 0.2s;
+  }
+  .contact-info a:hover { color: #fff; }
+  .contact-right { flex: 1; }
+  .form-group { margin-bottom: 20px; }
+  .form-group label {
+    display: block; font-size: 0.75rem;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: rgba(255,255,255,0.4); margin-bottom: 8px;
+  }
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    width: 100%; padding: 14px 0;
+    background: transparent;
+    border: none; border-bottom: 1px solid rgba(255,255,255,0.15);
+    color: var(--white); font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem; outline: none;
+    transition: border-color 0.2s;
+    -webkit-appearance: none;
+  }
+  .form-group select option { background: var(--black); }
+  .form-group input:focus,
+  .form-group textarea:focus,
+  .form-group select:focus { border-color: rgba(255,255,255,0.6); }
+  .form-group textarea { resize: none; height: 100px; }
+  .form-submit {
+    width: 100%; padding: 16px;
+    background: var(--white); color: var(--black);
+    border: none; cursor: pointer;
+    font-family: 'Syne', sans-serif;
+    font-size: 0.9rem; font-weight: 700;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    transition: opacity 0.2s; margin-top: 8px;
+  }
+  .form-submit:hover { opacity: 0.85; }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding: 32px 6vw;
+    background: var(--black); color: rgba(255,255,255,0.3);
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 0.8rem;
+  }
+  footer a { color: rgba(255,255,255,0.4); text-decoration: none; }
+  footer a:hover { color: #fff; }
+  .footer-links { display: flex; gap: 28px; }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; } to { opacity: 1; }
+  }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+  @keyframes scrollDown {
+    0%   { transform: scaleY(0); transform-origin: top; }
+    50%  { transform: scaleY(1); transform-origin: top; }
+    51%  { transform: scaleY(1); transform-origin: bottom; }
+    100% { transform: scaleY(0); transform-origin: bottom; }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .hero-bottom { flex-direction: column; gap: 32px; }
+    .hero-stats { gap: 32px; }
+    .services-grid { grid-template-columns: 1fr; }
+    .pricing-grid { grid-template-columns: 1fr; }
+    .contact-inner { flex-direction: column; }
+    .scroll-line { display: none; }
+    footer { flex-direction: column; gap: 16px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">DevCraft <span>Studio</span></div>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Start a Project</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <p class="hero-tag">Web Development Agency · Est. 2024</p>
+  <h1>We Build<br><em>Digital</em><br>Products.</h1>
+  <div class="hero-bottom">
+    <p class="hero-desc">
+      Full-stack web applications crafted with precision. From concept to deployment — we turn your ideas into high-performance digital experiences.
+    </p>
+    <div class="hero-stats">
+      <div>
+        <span class="stat-num">20+</span>
+        <span class="stat-label">Projects Delivered</span>
+      </div>
+      <div>
+        <span class="stat-num">100%</span>
+        <span class="stat-label">Client Satisfaction</span>
+      </div>
+      <div>
+        <span class="stat-num">48h</span>
+        <span class="stat-label">Response Time</span>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-line"><span>Scroll</span></div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee">
+    <span>MERN Stack</span><span class="dot">✦</span>
+    <span>React.js</span><span class="dot">✦</span>
+    <span>Node.js</span><span class="dot">✦</span>
+    <span>MongoDB</span><span class="dot">✦</span>
+    <span>SaaS MVPs</span><span class="dot">✦</span>
+    <span>E-Commerce</span><span class="dot">✦</span>
+    <span>Landing Pages</span><span class="dot">✦</span>
+    <span>REST APIs</span><span class="dot">✦</span>
+    <span>MERN Stack</span><span class="dot">✦</span>
+    <span>React.js</span><span class="dot">✦</span>
+    <span>Node.js</span><span class="dot">✦</span>
+    <span>MongoDB</span><span class="dot">✦</span>
+    <span>SaaS MVPs</span><span class="dot">✦</span>
+    <span>E-Commerce</span><span class="dot">✦</span>
+    <span>Landing Pages</span><span class="dot">✦</span>
+    <span>REST APIs</span><span class="dot">✦</span>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="section" id="services">
+  <div class="section-header">
+    <span class="section-num">01 — Services</span>
+    <h2 class="section-title">What We Build</h2>
+  </div>
+  <div class="services-grid">
+    <div class="service-card">
+      <span class="svc-num">01</span>
+      <h3 class="svc-title">MERN Stack Web Apps</h3>
+      <p class="svc-desc">Full-stack applications built with MongoDB, Express, React & Node.js. Scalable architecture, clean codebase, production-ready deployment.</p>
+      <span class="svc-arrow">→</span>
+    </div>
+    <div class="service-card">
+      <span class="svc-num">02</span>
+      <h3 class="svc-title">SaaS MVPs</h3>
+      <p class="svc-desc">Launch your software product fast. We build minimum viable products with auth, billing, dashboards — everything you need to validate your idea.</p>
+      <span class="svc-arrow">→</span>
+    </div>
+    <div class="service-card">
+      <span class="svc-num">03</span>
+      <h3 class="svc-title">E-Commerce Stores</h3>
+      <p class="svc-desc">Custom online stores with payment integration, inventory management, and optimized checkout flows that convert visitors into buyers.</p>
+      <span class="svc-arrow">→</span>
+    </div>
+    <div class="service-card">
+      <span class="svc-num">04</span>
+      <h3 class="svc-title">Landing Pages & Portfolios</h3>
+      <p class="svc-desc">High-converting landing pages and stunning portfolio websites. Pixel-perfect design, fast load times, and mobile-first responsive layouts.</p>
+      <span class="svc-arrow">→</span>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="section process-section" id="process">
+  <div class="section-header">
+    <span class="section-num">02 — Process</span>
+    <h2 class="section-title">How We Work</h2>
+  </div>
+  <div class="process-list">
+    <div class="process-item">
+      <span class="p-num">01</span>
+      <span class="p-title">Discovery Call</span>
+      <p class="p-desc">We start with a free consultation to understand your goals, requirements, and timeline. No fluff — just clarity on what needs to be built.</p>
+    </div>
+    <div class="process-item">
+      <span class="p-num">02</span>
+      <span class="p-title">Proposal & Planning</span>
+      <p class="p-desc">You receive a detailed project scope, tech stack recommendation, timeline, and fixed-price quote within 48 hours.</p>
+    </div>
+    <div class="process-item">
+      <span class="p-num">03</span>
+      <span class="p-title">Design & Development</span>
+      <p class="p-desc">We build in sprints with regular updates. You get access to a staging environment so you can track progress in real time.</p>
+    </div>
+    <div class="process-item">
+      <span class="p-num">04</span>
+      <span class="p-title">Review & Launch</span>
+      <p class="p-desc">Final testing, your feedback, revisions — then we deploy to production. Full handover with documentation and 30-day post-launch support.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section" id="pricing">
+  <div class="section-header">
+    <span class="section-num">03 — Pricing</span>
+    <h2 class="section-title">Transparent Rates</h2>
+  </div>
+  <div class="pricing-grid">
+    <div class="price-card">
+      <span class="price-label">Starter</span>
+      <div class="price-amount">$299</div>
+      <p class="price-sub">Best for landing pages & portfolios</p>
+      <ul class="price-features">
+        <li>Responsive Landing Page</li>
+        <li>Up to 5 Sections</li>
+        <li>Contact Form Integration</li>
+        <li>SEO Optimized</li>
+        <li>7-Day Delivery</li>
+      </ul>
+      <a href="#contact" class="price-btn price-btn-outline">Get Started</a>
+    </div>
+    <div class="price-card featured">
+      <span class="price-label">Professional</span>
+      <div class="price-amount">$799</div>
+      <p class="price-sub">Best for full web applications</p>
+      <ul class="price-features">
+        <li>Full MERN Stack App</li>
+        <li>User Auth & Dashboard</li>
+        <li>REST API Backend</li>
+        <li>Database Design</li>
+        <li>Deployment Included</li>
+      </ul>
+      <a href="#contact" class="price-btn price-btn-solid">Get Started</a>
+    </div>
+    <div class="price-card">
+      <span class="price-label">Enterprise</span>
+      <div class="price-amount">Custom</div>
+      <p class="price-sub">For SaaS MVPs & complex products</p>
+      <ul class="price-features">
+        <li>SaaS / E-Commerce Build</li>
+        <li>Payment Integration</li>
+        <li>Admin Panel</li>
+        <li>Ongoing Maintenance</li>
+        <li>Priority Support</li>
+      </ul>
+      <a href="#contact" class="price-btn price-btn-outline">Let's Talk</a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section contact-section" id="contact">
+  <div class="section-header" style="border-color: rgba(255,255,255,0.1);">
+    <span class="section-num" style="color:rgba(255,255,255,0.35);">04 — Contact</span>
+    <h2 class="section-title" style="color:#fff;">Start a Project</h2>
+  </div>
+  <div class="contact-inner">
+    <div class="contact-left">
+      <h2>Let's build<br>something<br>great.</h2>
+      <p>Have a project in mind? Fill out the form and we'll get back to you within 24 hours with a free consultation.</p>
+      <div class="contact-info">
+        <a href="mailto:hello@devcraftstudio.com">hello@devcraftstudio.com</a>
+        <a href="#">Fiverr: devcraft_studio</a>
+        <a href="#">LinkedIn: DevCraft Studio</a>
+      </div>
+    </div>
+    <div class="contact-right">
+      <div class="form-group">
+        <label>Your Name</label>
+        <input type="text" placeholder="John Smith">
+      </div>
+      <div class="form-group">
+        <label>Email Address</label>
+        <input type="email" placeholder="john@company.com">
+      </div>
+      <div class="form-group">
+        <label>Project Type</label>
+        <select>
+          <option>MERN Stack Web App</option>
+          <option>SaaS MVP</option>
+          <option>E-Commerce Store</option>
+          <option>Landing Page / Portfolio</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Tell Us About Your Project</label>
+        <textarea placeholder="Brief description of what you need..."></textarea>
+      </div>
+      <button class="form-submit">Send Message →</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span>© 2024 DevCraft Studio. All rights reserved.</span>
+  <div class="footer-links">
+    <a href="#services">Services</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#contact">Contact</a>
+  </div>
+</footer>
+
+</body>
+</html>
