@@ -9,20 +9,23 @@
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
   :root {
-    --black: #0a0a0a;
-    --white: #f8f7f4;
-    --gray: #6b6b6b;
-    --light: #efefec;
-    --accent: #1a1a1a;
-    --line: #e0dfd9;
+    --black: #0f0e17;
+    --white: #f0eeff;
+    --gray: #8b82b0;
+    --light: #1a1830;
+    --accent: #c9b8ff;
+    --line: #2a2545;
+    --purple: #7c5cfc;
+    --purple-dim: #3d2f8a;
+    --surface: #17152b;
   }
 
   html { scroll-behavior: smooth; }
 
   body {
     font-family: 'DM Sans', sans-serif;
-    background: var(--white);
-    color: var(--black);
+    background: var(--black);
+    color: var(--white);
     overflow-x: hidden;
   }
 
@@ -32,7 +35,7 @@
     z-index: 100;
     display: flex; align-items: center; justify-content: space-between;
     padding: 22px 6vw;
-    background: rgba(248,247,244,0.92);
+    background: rgba(15,14,23,0.92);
     backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--line);
   }
@@ -48,12 +51,12 @@
     text-decoration: none; letter-spacing: 0.01em;
     transition: color 0.2s;
   }
-  .nav-links a:hover { color: var(--black); }
+  .nav-links a:hover { color: var(--accent); }
   .nav-cta {
     font-family: 'DM Sans', sans-serif;
     font-size: 0.85rem; font-weight: 500;
     padding: 10px 22px;
-    background: var(--black); color: var(--white);
+    background: var(--purple); color: #fff;
     border: none; cursor: pointer;
     text-decoration: none;
     transition: opacity 0.2s;
@@ -82,7 +85,7 @@
     max-width: 900px;
     opacity: 0; animation: fadeUp 0.8s 0.4s forwards;
   }
-  .hero h1 em { font-style: normal; color: var(--gray); }
+  .hero h1 em { font-style: normal; color: var(--accent); }
   .hero-bottom {
     display: flex; align-items: flex-end; justify-content: space-between;
     margin-top: 60px;
@@ -121,7 +124,7 @@
   /* ── MARQUEE ── */
   .marquee-wrap {
     overflow: hidden; border-bottom: 1px solid var(--line);
-    padding: 18px 0; background: var(--black);
+    padding: 18px 0; background: var(--purple-dim);
   }
   .marquee {
     display: flex; gap: 60px;
@@ -157,20 +160,20 @@
   .services-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 1px; background: var(--line);
-    border: 1px solid var(--line);
+    gap: 1px; background: var(--line); border-color: var(--line);
+    border: 1px solid var(--line); background: var(--surface);
   }
   .service-card {
-    background: var(--white);
+    background: var(--surface);
     padding: 48px 44px;
     transition: background 0.3s;
     cursor: default;
   }
-  .service-card:hover { background: var(--black); }
+  .service-card:hover { background: var(--purple); }
   .service-card:hover .svc-title,
   .service-card:hover .svc-desc,
-  .service-card:hover .svc-num { color: var(--white); }
-  .service-card:hover .svc-arrow { color: var(--white); opacity: 1; }
+  .service-card:hover .svc-num { color: #fff; }
+  .service-card:hover .svc-arrow { color: #fff; opacity: 1; }
   .svc-num {
     font-size: 0.72rem; letter-spacing: 0.16em;
     color: var(--gray); text-transform: uppercase;
@@ -194,7 +197,7 @@
   }
 
   /* ── PROCESS ── */
-  .process-section { background: var(--light); }
+  .process-section { background: var(--surface); }
   .process-list { display: flex; flex-direction: column; }
   .process-item {
     display: flex; align-items: flex-start; gap: 40px;
@@ -222,14 +225,14 @@
     gap: 24px;
   }
   .price-card {
-    border: 1px solid var(--line);
+    border: 1px solid var(--line); background: var(--surface);
     padding: 44px 36px;
     position: relative;
     transition: border-color 0.3s, transform 0.3s;
   }
-  .price-card:hover { border-color: var(--black); transform: translateY(-4px); }
+  .price-card:hover { border-color: var(--purple); transform: translateY(-4px); }
   .price-card.featured {
-    background: var(--black); color: var(--white);
+    background: var(--purple); color: #fff;
     border-color: var(--black);
   }
   .price-label {
@@ -265,18 +268,18 @@
     transition: all 0.2s; letter-spacing: 0.02em;
   }
   .price-btn-outline {
-    border: 1px solid var(--black); background: transparent;
-    color: var(--black);
+    border: 1px solid var(--purple); background: transparent;
+    color: var(--accent);
   }
-  .price-btn-outline:hover { background: var(--black); color: var(--white); }
+  .price-btn-outline:hover { background: var(--purple); color: #fff; }
   .price-btn-solid {
-    background: var(--white); color: var(--black); border: none;
+    background: var(--surface); color: var(--black); border: none;
   }
   .price-btn-solid:hover { opacity: 0.85; }
 
   /* ── CONTACT ── */
   .contact-section {
-    background: var(--black); color: var(--white);
+    background: var(--purple); color: #fff;
   }
   .contact-inner {
     display: flex; gap: 10vw; align-items: flex-start;
@@ -321,7 +324,7 @@
   .form-group textarea { resize: none; height: 100px; }
   .form-submit {
     width: 100%; padding: 16px;
-    background: var(--white); color: var(--black);
+    background: var(--surface); color: var(--black);
     border: none; cursor: pointer;
     font-family: 'Syne', sans-serif;
     font-size: 0.9rem; font-weight: 700;
@@ -332,15 +335,73 @@
 
   /* ── FOOTER ── */
   footer {
-    border-top: 1px solid rgba(255,255,255,0.1);
+    border-top: 1px solid var(--line);
     padding: 32px 6vw;
-    background: var(--black); color: rgba(255,255,255,0.3);
+    background: var(--surface); color: rgba(200,180,255,0.35);
     display: flex; justify-content: space-between; align-items: center;
     font-size: 0.8rem;
   }
   footer a { color: rgba(255,255,255,0.4); text-decoration: none; }
   footer a:hover { color: #fff; }
   .footer-links { display: flex; gap: 28px; }
+
+
+  /* ── PORTFOLIO ── */
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .portfolio-card {
+    border: 1px solid var(--line); background: var(--surface);
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .portfolio-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+  }
+  .portfolio-thumb {
+    width: 100%; aspect-ratio: 16/10;
+    display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+  }
+  .portfolio-thumb-inner { text-align: center; }
+  .portfolio-thumb-icon { font-size: 2.2rem; margin-bottom: 8px; display: block; opacity: 0.35; }
+  .portfolio-thumb-label { font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gray); }
+  .portfolio-thumb.color-1 { background: #1e1535; }
+  .portfolio-thumb.color-2 { background: #151e35; }
+  .portfolio-thumb.color-3 { background: #1e1520; }
+  .portfolio-thumb.color-4 { background: #131a30; }
+  .portfolio-thumb.color-5 { background: #1a1820; }
+  .portfolio-card-body { padding: 24px; }
+  .portfolio-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
+  .portfolio-tag {
+    font-size: 0.68rem; letter-spacing: 0.1em;
+    text-transform: uppercase; padding: 3px 10px;
+    border: 1px solid var(--line); background: var(--surface); color: var(--gray);
+  }
+  .portfolio-card-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.05rem; font-weight: 700;
+    letter-spacing: -0.02em; margin-bottom: 8px;
+  }
+  .portfolio-card-desc { font-size: 0.85rem; color: var(--gray); line-height: 1.6; margin-bottom: 16px; }
+  .portfolio-card-link {
+    font-size: 0.8rem; color: var(--accent);
+    text-decoration: none; letter-spacing: 0.04em;
+    border-bottom: 1px solid var(--purple-dim);
+    padding-bottom: 2px; transition: opacity 0.2s; display: inline-block;
+  }
+  .portfolio-card-link:hover { opacity: 0.5; }
+  .portfolio-coming { opacity: 0.45; pointer-events: none; }
+  .coming-badge {
+    position: absolute; top: 12px; right: 12px;
+    font-size: 0.65rem; letter-spacing: 0.12em;
+    text-transform: uppercase; padding: 4px 10px;
+    background: var(--purple); color: #fff;
+  }
+  @media (max-width: 768px) { .portfolio-grid { grid-template-columns: 1fr; } }
 
   /* ── ANIMATIONS ── */
   @keyframes fadeUp {
@@ -382,6 +443,7 @@
   <ul class="nav-links">
     <li><a href="#services">Services</a></li>
     <li><a href="#process">Process</a></li>
+    <li><a href="#portfolio">Portfolio</a></li>
     <li><a href="#pricing">Pricing</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
@@ -500,10 +562,147 @@
   </div>
 </section>
 
+
+<!-- PORTFOLIO -->
+<section class="section" id="portfolio">
+  <div class="section-header">
+    <span class="section-num">03 — Work</span>
+    <h2 class="section-title">Selected Projects</h2>
+  </div>
+  <div class="portfolio-grid">
+
+    <!-- PROJECT 1: Task Manager -->
+    <div class="portfolio-card portfolio-coming">
+      <div class="portfolio-thumb color-1">
+        <div class="portfolio-thumb-inner">
+          <span class="portfolio-thumb-icon">📋</span>
+          <span class="portfolio-thumb-label">Coming Soon</span>
+        </div>
+        <span class="coming-badge">In Progress</span>
+      </div>
+      <div class="portfolio-card-body">
+        <div class="portfolio-tags">
+          <span class="portfolio-tag">React</span>
+          <span class="portfolio-tag">Node.js</span>
+          <span class="portfolio-tag">MongoDB</span>
+        </div>
+        <h3 class="portfolio-card-title">Task Manager App</h3>
+        <p class="portfolio-card-desc">Full-stack MERN task management app with user auth, real-time updates, and team collaboration features.</p>
+        <a href="#" class="portfolio-card-link">View Project →</a>
+      </div>
+    </div>
+
+    <!-- PROJECT 2: E-Commerce -->
+    <div class="portfolio-card portfolio-coming">
+      <div class="portfolio-thumb color-2">
+        <div class="portfolio-thumb-inner">
+          <span class="portfolio-thumb-icon">🛒</span>
+          <span class="portfolio-thumb-label">Coming Soon</span>
+        </div>
+        <span class="coming-badge">In Progress</span>
+      </div>
+      <div class="portfolio-card-body">
+        <div class="portfolio-tags">
+          <span class="portfolio-tag">MERN</span>
+          <span class="portfolio-tag">Stripe</span>
+          <span class="portfolio-tag">Redux</span>
+        </div>
+        <h3 class="portfolio-card-title">E-Commerce Store</h3>
+        <p class="portfolio-card-desc">Custom online store with product management, cart, Stripe payments, and a full admin dashboard.</p>
+        <a href="#" class="portfolio-card-link">View Project →</a>
+      </div>
+    </div>
+
+    <!-- PROJECT 3: Portfolio Template -->
+    <div class="portfolio-card portfolio-coming">
+      <div class="portfolio-thumb color-3">
+        <div class="portfolio-thumb-inner">
+          <span class="portfolio-thumb-icon">💼</span>
+          <span class="portfolio-thumb-label">Coming Soon</span>
+        </div>
+        <span class="coming-badge">In Progress</span>
+      </div>
+      <div class="portfolio-card-body">
+        <div class="portfolio-tags">
+          <span class="portfolio-tag">React</span>
+          <span class="portfolio-tag">Tailwind</span>
+          <span class="portfolio-tag">Framer</span>
+        </div>
+        <h3 class="portfolio-card-title">Portfolio Template</h3>
+        <p class="portfolio-card-desc">Animated, responsive developer portfolio template. Clean design, fast load times, fully customizable.</p>
+        <a href="#" class="portfolio-card-link">View Project →</a>
+      </div>
+    </div>
+
+    <!-- PROJECT 4: SaaS Dashboard -->
+    <div class="portfolio-card portfolio-coming">
+      <div class="portfolio-thumb color-4">
+        <div class="portfolio-thumb-inner">
+          <span class="portfolio-thumb-icon">📊</span>
+          <span class="portfolio-thumb-label">Coming Soon</span>
+        </div>
+        <span class="coming-badge">Planned</span>
+      </div>
+      <div class="portfolio-card-body">
+        <div class="portfolio-tags">
+          <span class="portfolio-tag">React</span>
+          <span class="portfolio-tag">Node.js</span>
+          <span class="portfolio-tag">Recharts</span>
+        </div>
+        <h3 class="portfolio-card-title">SaaS Dashboard</h3>
+        <p class="portfolio-card-desc">Analytics dashboard with charts, user management, role-based access, and a clean sidebar navigation.</p>
+        <a href="#" class="portfolio-card-link">View Project →</a>
+      </div>
+    </div>
+
+    <!-- PROJECT 5: Link-in-Bio -->
+    <div class="portfolio-card portfolio-coming">
+      <div class="portfolio-thumb color-5">
+        <div class="portfolio-thumb-inner">
+          <span class="portfolio-thumb-icon">🔗</span>
+          <span class="portfolio-thumb-label">Coming Soon</span>
+        </div>
+        <span class="coming-badge">Planned</span>
+      </div>
+      <div class="portfolio-card-body">
+        <div class="portfolio-tags">
+          <span class="portfolio-tag">MERN</span>
+          <span class="portfolio-tag">JWT</span>
+          <span class="portfolio-tag">Analytics</span>
+        </div>
+        <h3 class="portfolio-card-title">Link-in-Bio Tool</h3>
+        <p class="portfolio-card-desc">Create custom profile pages with unlimited links, click analytics, and a live preview editor.</p>
+        <a href="#" class="portfolio-card-link">View Project →</a>
+      </div>
+    </div>
+
+    <!-- DevCraft Studio Website (LIVE) -->
+    <div class="portfolio-card">
+      <div class="portfolio-thumb" style="background:#0a0a0a;">
+        <div class="portfolio-thumb-inner">
+          <span class="portfolio-thumb-icon" style="opacity:0.6; filter:invert(1)">🌐</span>
+          <span class="portfolio-thumb-label" style="color:#888;">Live Project</span>
+        </div>
+      </div>
+      <div class="portfolio-card-body">
+        <div class="portfolio-tags">
+          <span class="portfolio-tag">HTML/CSS</span>
+          <span class="portfolio-tag">JavaScript</span>
+          <span class="portfolio-tag">Vercel</span>
+        </div>
+        <h3 class="portfolio-card-title">DevCraft Studio Website</h3>
+        <p class="portfolio-card-desc">This agency website — minimal dark aesthetic, smooth animations, working contact form via Formspree.</p>
+        <a href="#" class="portfolio-card-link">View Live →</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
 <!-- PRICING -->
 <section class="section" id="pricing">
   <div class="section-header">
-    <span class="section-num">03 — Pricing</span>
+    <span class="section-num">04 — Pricing</span>
     <h2 class="section-title">Transparent Rates</h2>
   </div>
   <div class="pricing-grid">
@@ -552,7 +751,7 @@
 <!-- CONTACT -->
 <section class="section contact-section" id="contact">
   <div class="section-header" style="border-color: rgba(255,255,255,0.1);">
-    <span class="section-num" style="color:rgba(255,255,255,0.35);">04 — Contact</span>
+    <span class="section-num" style="color:rgba(255,255,255,0.35);">05 — Contact</span>
     <h2 class="section-title" style="color:#fff;">Start a Project</h2>
   </div>
   <div class="contact-inner">
@@ -566,29 +765,35 @@
       </div>
     </div>
     <div class="contact-right">
-      <div class="form-group">
-        <label>Your Name</label>
-        <input type="text" placeholder="John Smith">
+      <div id="form-success" style="display:none; padding: 40px 0;">
+        <p style="font-family:'Syne',sans-serif; font-size:1.4rem; font-weight:700; margin-bottom:12px;">Message Sent ✓</p>
+        <p style="color:rgba(255,255,255,0.5); font-size:0.95rem; line-height:1.7;">Thanks! We'll get back to you within 24 hours.</p>
       </div>
-      <div class="form-group">
-        <label>Email Address</label>
-        <input type="email" placeholder="john@company.com">
-      </div>
-      <div class="form-group">
-        <label>Project Type</label>
-        <select>
-          <option>MERN Stack Web App</option>
-          <option>SaaS MVP</option>
-          <option>E-Commerce Store</option>
-          <option>Landing Page / Portfolio</option>
-          <option>Other</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label>Tell Us About Your Project</label>
-        <textarea placeholder="Brief description of what you need..."></textarea>
-      </div>
-      <button class="form-submit">Send Message →</button>
+      <form id="contact-form">
+        <div class="form-group">
+          <label>Your Name</label>
+          <input type="text" name="name" placeholder="John Smith" required>
+        </div>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" name="email" placeholder="john@company.com" required>
+        </div>
+        <div class="form-group">
+          <label>Project Type</label>
+          <select name="project_type">
+            <option>MERN Stack Web App</option>
+            <option>SaaS MVP</option>
+            <option>E-Commerce Store</option>
+            <option>Landing Page / Portfolio</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Tell Us About Your Project</label>
+          <textarea name="message" placeholder="Brief description of what you need..." required></textarea>
+        </div>
+        <button type="submit" class="form-submit" id="submit-btn">Send Message →</button>
+      </form>
     </div>
   </div>
 </section>
@@ -603,5 +808,37 @@
   </div>
 </footer>
 
+<script>
+  document.getElementById('contact-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const btn = document.getElementById('submit-btn');
+    btn.textContent = 'Sending...';
+    btn.style.opacity = '0.6';
+    btn.disabled = true;
+
+    const formData = new FormData(this);
+
+    try {
+      const res = await fetch('https://formspree.io/f/xbdwpewr', {
+        method: 'POST',
+        body: formData,
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (res.ok) {
+        document.getElementById('contact-form').style.display = 'none';
+        document.getElementById('form-success').style.display = 'block';
+      } else {
+        btn.textContent = 'Failed. Try Again →';
+        btn.style.opacity = '1';
+        btn.disabled = false;
+      }
+    } catch(err) {
+      btn.textContent = 'Failed. Try Again →';
+      btn.style.opacity = '1';
+      btn.disabled = false;
+    }
+  });
+</script>
 </body>
 </html>
