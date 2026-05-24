@@ -66,48 +66,158 @@
   /* ── HERO ── */
   .hero {
     min-height: 100vh;
-    display: flex; flex-direction: column; justify-content: flex-end;
-    padding: 0 6vw 8vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 120px 6vw 80px;
     border-bottom: 1px solid var(--line);
     position: relative;
+    gap: 60px;
+  }
+  .hero-left {
+    display: flex; flex-direction: column; justify-content: center;
+    opacity: 0; animation: fadeUp 0.8s 0.2s forwards;
   }
   .hero-tag {
-    font-size: 0.78rem; letter-spacing: 0.18em;
-    color: var(--gray); text-transform: uppercase;
-    margin-bottom: 28px;
-    opacity: 0; animation: fadeUp 0.8s 0.2s forwards;
+    font-size: 0.72rem; letter-spacing: 0.2em;
+    color: var(--accent); text-transform: uppercase;
+    margin-bottom: 24px;
+    display: inline-flex; align-items: center; gap: 10px;
+  }
+  .hero-tag::before {
+    content: ''; width: 24px; height: 1px; background: var(--accent);
   }
   .hero h1 {
     font-family: 'Syne', sans-serif;
-    font-size: clamp(1.8rem, 3.5vw, 3.2rem);
-    font-weight: 700; line-height: 1.1;
-    letter-spacing: -0.02em;
-    max-width: 700px;
-    opacity: 0; animation: fadeUp 0.8s 0.4s forwards;
+    font-size: clamp(2rem, 3.8vw, 3.6rem);
+    font-weight: 800; line-height: 1.08;
+    letter-spacing: -0.03em;
+    margin-bottom: 24px;
   }
   .hero h1 em { font-style: normal; color: var(--accent); }
-  .hero-bottom {
-    display: flex; align-items: flex-end; justify-content: space-between;
-    margin-top: 60px;
-    opacity: 0; animation: fadeUp 0.8s 0.6s forwards;
-  }
   .hero-desc {
-    font-size: 1rem; color: var(--gray);
-    line-height: 1.7; max-width: 360px;
+    font-size: 0.95rem; color: var(--gray);
+    line-height: 1.8; max-width: 400px;
+    margin-bottom: 40px;
   }
-  .hero-stats { display: flex; gap: 48px; }
+  .hero-actions { display: flex; gap: 16px; align-items: center; margin-bottom: 56px; }
+  .btn-primary {
+    padding: 13px 28px;
+    background: var(--purple); color: #fff;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.88rem; font-weight: 500;
+    text-decoration: none; letter-spacing: 0.02em;
+    transition: opacity 0.2s;
+  }
+  .btn-primary:hover { opacity: 0.82; }
+  .btn-ghost {
+    padding: 13px 28px;
+    background: transparent; color: var(--gray);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.88rem;
+    text-decoration: none; letter-spacing: 0.02em;
+    border: 1px solid var(--line);
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .btn-ghost:hover { border-color: var(--gray); color: var(--white); }
+  .hero-stats { display: flex; gap: 40px; border-top: 1px solid var(--line); padding-top: 32px; }
   .stat-num {
     font-family: 'Syne', sans-serif;
-    font-size: 1.5rem; font-weight: 700;
+    font-size: 1.6rem; font-weight: 800;
     letter-spacing: -0.03em; display: block;
+    color: var(--white);
   }
-  .stat-label { font-size: 0.78rem; color: var(--gray); letter-spacing: 0.05em; }
+  .stat-label { font-size: 0.72rem; color: var(--gray); letter-spacing: 0.05em; margin-top: 2px; display: block; }
+
+  /* ── HERO RIGHT VISUAL ── */
+  .hero-right {
+    position: relative;
+    opacity: 0; animation: fadeUp 0.9s 0.5s forwards;
+  }
+  .hero-visual-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    padding: 32px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-visual-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--purple), transparent);
+  }
+  .hvc-top {
+    display: flex; align-items: center; gap: 8px; margin-bottom: 28px;
+  }
+  .hvc-dot { width: 8px; height: 8px; border-radius: 50%; }
+  .hvc-dot:nth-child(1) { background: #ff5f57; }
+  .hvc-dot:nth-child(2) { background: #febc2e; }
+  .hvc-dot:nth-child(3) { background: #28c840; }
+  .hvc-filename {
+    margin-left: 8px;
+    font-size: 0.72rem; letter-spacing: 0.06em;
+    color: var(--gray);
+  }
+  .code-block {
+    font-family: 'Courier New', monospace;
+    font-size: 0.82rem; line-height: 1.8;
+    color: #ccc;
+  }
+  .code-block .kw { color: #a78bfa; }
+  .code-block .fn { color: #60a5fa; }
+  .code-block .str { color: #34d399; }
+  .code-block .cm { color: #555; }
+  .code-block .num { color: #fb923c; }
+  .code-cursor {
+    display: inline-block; width: 2px; height: 14px;
+    background: var(--accent); vertical-align: middle;
+    animation: blink 1s step-end infinite;
+  }
+
+  /* Tech Stack Badges */
+  .tech-badges {
+    display: flex; flex-wrap: wrap; gap: 10px;
+    margin-top: 28px; padding-top: 24px;
+    border-top: 1px solid var(--line);
+  }
+  .tech-badge {
+    display: flex; align-items: center; gap: 7px;
+    padding: 7px 14px;
+    background: var(--black);
+    border: 1px solid var(--line);
+    font-size: 0.75rem; color: var(--gray);
+    letter-spacing: 0.04em;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .tech-badge:hover { border-color: var(--purple); color: var(--white); }
+  .tech-badge svg { width: 15px; height: 15px; flex-shrink: 0; }
+
+  /* Floating stat pill */
+  .hero-pill {
+    position: absolute; top: -18px; right: -18px;
+    background: var(--purple);
+    padding: 12px 18px;
+    font-family: 'Syne', sans-serif;
+    font-size: 0.78rem; font-weight: 700;
+    letter-spacing: 0.04em;
+    color: #fff;
+    box-shadow: 0 8px 32px rgba(109,74,255,0.35);
+  }
+
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; padding-top: 100px; }
+    .hero-right { display: none; }
+  }
 
   /* scroll indicator */
   .scroll-line {
-    position: absolute; right: 6vw; bottom: 8vh;
+    position: absolute; right: 6vw; bottom: 5vh;
     display: flex; flex-direction: column; align-items: center; gap: 10px;
     opacity: 0; animation: fadeIn 1s 1.2s forwards;
+    grid-column: 1 / -1;
   }
   .scroll-line span {
     font-size: 0.7rem; letter-spacing: 0.14em;
@@ -452,12 +562,15 @@
 
 <!-- HERO -->
 <section class="hero">
-  <p class="hero-tag">Web Development Agency · Est. 2024</p>
-  <h1>We Build<br><em>Digital</em><br>Products.</h1>
-  <div class="hero-bottom">
-    <p class="hero-desc">
-      Full-stack web applications crafted with precision. From concept to deployment — we turn your ideas into high-performance digital experiences.
-    </p>
+  <!-- LEFT -->
+  <div class="hero-left">
+    <p class="hero-tag">Web Development Agency · Est. 2024</p>
+    <h1>We Build<br><em>Digital</em><br>Products.</h1>
+    <p class="hero-desc">Full-stack web applications crafted with precision. From concept to deployment — we turn your ideas into high-performance digital experiences.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Start a Project →</a>
+      <a href="#portfolio" class="btn-ghost">View Work</a>
+    </div>
     <div class="hero-stats">
       <div>
         <span class="stat-num">20+</span>
@@ -473,6 +586,60 @@
       </div>
     </div>
   </div>
+
+  <!-- RIGHT VISUAL -->
+  <div class="hero-right">
+    <div class="hero-pill">Available for Projects</div>
+    <div class="hero-visual-card">
+      <div class="hvc-top">
+        <span class="hvc-dot"></span>
+        <span class="hvc-dot"></span>
+        <span class="hvc-dot"></span>
+        <span class="hvc-filename">server.js</span>
+      </div>
+      <div class="code-block">
+        <div><span class="cm">// DevCraft Studio</span></div>
+        <div><span class="kw">const</span> app = <span class="fn">express</span>()</div>
+        <div>&nbsp;</div>
+        <div><span class="cm">// MongoDB connected ✓</span></div>
+        <div><span class="fn">mongoose</span>.<span class="fn">connect</span>(<span class="str">'mongodb+srv...'</span>)</div>
+        <div>&nbsp;</div>
+        <div><span class="kw">app</span>.<span class="fn">get</span>(<span class="str">'/api/projects'</span>, <span class="kw">async</span> (req, res) => {</div>
+        <div>&nbsp;&nbsp;<span class="kw">const</span> projects = <span class="kw">await</span> <span class="fn">Project</span>.<span class="fn">find</span>()</div>
+        <div>&nbsp;&nbsp;res.<span class="fn">json</span>({ success: <span class="kw">true</span>, projects })</div>
+        <div>})</div>
+        <div>&nbsp;</div>
+        <div>app.<span class="fn">listen</span>(<span class="num">5000</span>) <span class="code-cursor"></span></div>
+      </div>
+      <div class="tech-badges">
+        <span class="tech-badge">
+          <svg viewBox="0 0 24 24" fill="#61DAFB"><circle cx="12" cy="12" r="2.5"/><ellipse cx="12" cy="12" rx="10" ry="4" fill="none" stroke="#61DAFB" stroke-width="1.2"/><ellipse cx="12" cy="12" rx="10" ry="4" fill="none" stroke="#61DAFB" stroke-width="1.2" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="10" ry="4" fill="none" stroke="#61DAFB" stroke-width="1.2" transform="rotate(120 12 12)"/></svg>
+          React
+        </span>
+        <span class="tech-badge">
+          <svg viewBox="0 0 24 24" fill="#68A063"><path d="M11.998 1.827L3.038 7v10l8.96 5.173L20.962 17V7z"/></svg>
+          Node.js
+        </span>
+        <span class="tech-badge">
+          <svg viewBox="0 0 24 24" fill="#47A248"><path d="M17.193 9.555c-1.264-5.58-4.252-7.479-4.49-8.773-.074-.4-.108-.889-.108-1.278 0 0-3.428 3.157-3.01 7.937.116 1.185.506 2.394 1.167 3.444-.07.016-.141.035-.213.048a3.3 3.3 0 0 1-.635.045 3.3 3.3 0 0 1-1.53-.37C7.6 9.898 7.6 8.748 7.61 8.27c.003-.153.016-.316.035-.474C6.47 9.205 5.8 10.988 5.8 12.8c0 3.426 2.777 6.2 6.2 6.2 3.424 0 6.2-2.774 6.2-6.2 0-1.156-.323-2.34-.997-3.245h-.01z"/></svg>
+          MongoDB
+        </span>
+        <span class="tech-badge">
+          <svg viewBox="0 0 24 24" fill="#fff" opacity="0.7"><rect x="2" y="2" width="9" height="9" rx="1"/><rect x="13" y="2" width="9" height="9" rx="1"/><rect x="2" y="13" width="9" height="9" rx="1"/><rect x="13" y="13" width="9" height="9" rx="1"/></svg>
+          Express
+        </span>
+        <span class="tech-badge">
+          <svg viewBox="0 0 24 24" fill="#000" stroke="#fff" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          Vercel
+        </span>
+        <span class="tech-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#F7DF1E" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="2" fill="#F7DF1E" stroke="none"/><path d="M7 17.5c.5 1 1.5 1.5 2.5 1.5 1.5 0 2.5-.8 2.5-2.5V11h-2v5c0 .8-.4 1-.9 1-.6 0-.9-.4-1.1-.9L7 17.5zM14 17.3c.6 1 1.6 1.7 3 1.7 1.5 0 2.8-.8 2.8-2.3 0-1.3-.8-1.9-2-2.4l-.5-.2c-.7-.3-1-.5-1-.9 0-.4.3-.6.8-.6.5 0 .8.2 1.1.8l1.5-.9c-.6-1-1.5-1.5-2.6-1.5-1.6 0-2.6.9-2.6 2.2 0 1.3.8 1.9 1.9 2.4l.5.2c.8.3 1.1.6 1.1 1 0 .5-.4.8-1.1.8-.8 0-1.2-.4-1.6-1.1L14 17.3z" fill="#333" stroke="none"/></svg>
+          JavaScript
+        </span>
+      </div>
+    </div>
+  </div>
+
   <div class="scroll-line"><span>Scroll</span></div>
 </section>
 
